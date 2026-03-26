@@ -123,7 +123,7 @@ namespace SimpleCalculator
             btn_div.Name = "btn_div";
             btn_div.Size = new Size(75, 55);
             btn_div.TabIndex = 6;
-            btn_div.Text = "/";
+            btn_div.Text = "÷";
             btn_div.UseVisualStyleBackColor = true;
             btn_div.Click += OperatorButton_Click;
             // 
@@ -167,7 +167,7 @@ namespace SimpleCalculator
             btn_mult.Name = "btn_mult";
             btn_mult.Size = new Size(75, 55);
             btn_mult.TabIndex = 10;
-            btn_mult.Text = "*";
+            btn_mult.Text = "X";
             btn_mult.UseVisualStyleBackColor = true;
             btn_mult.Click += OperatorButton_Click;
             // 
