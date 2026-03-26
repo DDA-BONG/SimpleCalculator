@@ -10,7 +10,7 @@ namespace SimpleCalculator
         /// <summary>
         ///  Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed resources are disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -46,8 +46,9 @@ namespace SimpleCalculator
             btn_num2 = new Button();
             btn_num3 = new Button();
             btn_plus = new Button();
+            btn_leftParen = new Button();
             btn_num0 = new Button();
-            btn_dot = new Button();
+            btn_rightParen = new Button();
             btn_equal = new Button();
             SuspendLayout();
             // 
@@ -55,7 +56,7 @@ namespace SimpleCalculator
             // 
             lbl_main.AutoSize = true;
             lbl_main.Font = new Font("맑은 고딕", 28.2F, FontStyle.Bold, GraphicsUnit.Point, 129);
-            lbl_main.ForeColor = Color.Blue;
+            lbl_main.ForeColor = Color.Yellow;
             lbl_main.Location = new Point(12, 9);
             lbl_main.Name = "lbl_main";
             lbl_main.Size = new Size(403, 62);
@@ -167,7 +168,7 @@ namespace SimpleCalculator
             btn_mult.Name = "btn_mult";
             btn_mult.Size = new Size(75, 55);
             btn_mult.TabIndex = 10;
-            btn_mult.Text = "X";
+            btn_mult.Text = "x";
             btn_mult.UseVisualStyleBackColor = true;
             btn_mult.Click += OperatorButton_Click;
             // 
@@ -259,6 +260,17 @@ namespace SimpleCalculator
             btn_plus.UseVisualStyleBackColor = true;
             btn_plus.Click += OperatorButton_Click;
             // 
+            // btn_leftParen
+            // 
+            btn_leftParen.Font = new Font("맑은 고딕", 18F);
+            btn_leftParen.Location = new Point(59, 528);
+            btn_leftParen.Name = "btn_leftParen";
+            btn_leftParen.Size = new Size(75, 55);
+            btn_leftParen.TabIndex = 19;
+            btn_leftParen.Text = "(";
+            btn_leftParen.UseVisualStyleBackColor = true;
+            btn_leftParen.Click += btn_leftParen_Click;
+            // 
             // btn_num0
             // 
             btn_num0.Font = new Font("맑은 고딕", 18F);
@@ -270,16 +282,16 @@ namespace SimpleCalculator
             btn_num0.UseVisualStyleBackColor = true;
             btn_num0.Click += NumberButton_Click;
             // 
-            // btn_dot
+            // btn_rightParen
             // 
-            btn_dot.Enabled = false;
-            btn_dot.Font = new Font("맑은 고딕", 18F);
-            btn_dot.Location = new Point(272, 528);
-            btn_dot.Name = "btn_dot";
-            btn_dot.Size = new Size(75, 55);
-            btn_dot.TabIndex = 21;
-            btn_dot.Text = ".";
-            btn_dot.UseVisualStyleBackColor = true;
+            btn_rightParen.Font = new Font("맑은 고딕", 18F);
+            btn_rightParen.Location = new Point(272, 528);
+            btn_rightParen.Name = "btn_rightParen";
+            btn_rightParen.Size = new Size(75, 55);
+            btn_rightParen.TabIndex = 21;
+            btn_rightParen.Text = ")";
+            btn_rightParen.UseVisualStyleBackColor = true;
+            btn_rightParen.Click += btn_rightParen_Click;
             // 
             // btn_equal
             // 
@@ -296,10 +308,12 @@ namespace SimpleCalculator
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Gray;
             ClientSize = new Size(506, 648);
             Controls.Add(btn_equal);
-            Controls.Add(btn_dot);
+            Controls.Add(btn_rightParen);
             Controls.Add(btn_num0);
+            Controls.Add(btn_leftParen);
             Controls.Add(btn_plus);
             Controls.Add(btn_num3);
             Controls.Add(btn_num2);
@@ -347,8 +361,9 @@ namespace SimpleCalculator
         private Button btn_num2;
         private Button btn_num3;
         private Button btn_plus;
+        private Button btn_leftParen;
         private Button btn_num0;
-        private Button btn_dot;
+        private Button btn_rightParen;
         private Button btn_equal;
     }
 }
