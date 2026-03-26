@@ -278,7 +278,7 @@ namespace SimpleCalculator
 
                 if (token == ")")
                 {
-                    while (operators.Count > 0 && operators.Peek() != "(")
+                    while (operators.Count > 0 && operators.Peek() != "(")// 닫는 괄호가 나올 때까지 괄호 안의 연산자들을 모두 계산합니다.
                     {
                         if (!ApplyTopOperator(values, operators.Pop()))
                         {
@@ -301,6 +301,7 @@ namespace SimpleCalculator
                     {
                         return false;
                     }
+                    // 연산자 우선순위가 같거나 높은 연산자들을 먼저 계산합니다.
                 }
 
                 operators.Push(token);
@@ -309,7 +310,7 @@ namespace SimpleCalculator
             while (operators.Count > 0)
             {
                 string op = operators.Pop();
-                if (op == "(")
+                if (op == "(")// 남은 연산자 중에 여는 괄호가 있으면 잘못된 입력입니다.
                 {
                     MessageBox.Show("괄호 개수가 맞지 않습니다.", "입력 오류", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
