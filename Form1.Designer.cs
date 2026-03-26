@@ -119,14 +119,14 @@ namespace SimpleCalculator
             // 
             // btn_div
             // 
-            btn_div.Enabled = false;
             btn_div.Font = new Font("맑은 고딕", 18F);
             btn_div.Location = new Point(378, 243);
             btn_div.Name = "btn_div";
             btn_div.Size = new Size(75, 55);
             btn_div.TabIndex = 6;
-            btn_div.Text = "÷";
+            btn_div.Text = "/";
             btn_div.UseVisualStyleBackColor = true;
+            btn_div.Click += OperatorButton_Click;
             // 
             // btn_num7
             // 
@@ -163,14 +163,14 @@ namespace SimpleCalculator
             // 
             // btn_mult
             // 
-            btn_mult.Enabled = false;
             btn_mult.Font = new Font("맑은 고딕", 18F);
             btn_mult.Location = new Point(378, 319);
             btn_mult.Name = "btn_mult";
             btn_mult.Size = new Size(75, 55);
             btn_mult.TabIndex = 10;
-            btn_mult.Text = "X";
+            btn_mult.Text = "*";
             btn_mult.UseVisualStyleBackColor = true;
+            btn_mult.Click += OperatorButton_Click;
             // 
             // btn_num4
             // 
@@ -207,7 +207,6 @@ namespace SimpleCalculator
             // 
             // btn_minus
             // 
-            btn_minus.Enabled = false;
             btn_minus.Font = new Font("맑은 고딕", 18F);
             btn_minus.Location = new Point(378, 390);
             btn_minus.Name = "btn_minus";
@@ -215,6 +214,7 @@ namespace SimpleCalculator
             btn_minus.TabIndex = 14;
             btn_minus.Text = "-";
             btn_minus.UseVisualStyleBackColor = true;
+            btn_minus.Click += OperatorButton_Click;
             // 
             // btn_num1
             // 
@@ -258,7 +258,7 @@ namespace SimpleCalculator
             btn_plus.TabIndex = 18;
             btn_plus.Text = "+";
             btn_plus.UseVisualStyleBackColor = true;
-            btn_plus.Click += btn_plus_Click;
+            btn_plus.Click += OperatorButton_Click;
             // 
             // btn_ready
             // 

@@ -6,7 +6,7 @@ namespace SimpleCalculator
         private int secondOperand;
         private int result;
         private string currentInput = string.Empty;
-        private bool plusSelected;
+        private string currentOperator = string.Empty;
         private bool justCalculated;
 
         public Form1()
@@ -26,7 +26,7 @@ namespace SimpleCalculator
                 return;
             }
 
-            if (justCalculated && !plusSelected)
+            if (justCalculated && string.IsNullOrEmpty(currentOperator))
             {
                 ResetCalculator();
             }
@@ -35,32 +35,41 @@ namespace SimpleCalculator
             UpdateInputDisplays();
         }
 
-        private void btn_plus_Click(object? sender, EventArgs e)
+        private void OperatorButton_Click(object? sender, EventArgs e)
         {
+            if (sender is not Button button)
+            {
+                return;
+            }
+
             if (!int.TryParse(currentInput, out firstOperand))
             {
                 return;
             }
 
             currentInput = string.Empty;
-            plusSelected = true;
+            currentOperator = button.Text;
             justCalculated = false;
-            txt_show.Text = $"{firstOperand} +";
+            txt_show.Text = $"{firstOperand} {currentOperator}";
             txt_oprnd.Text = "0";
         }
 
         private void btn_equal_Click(object? sender, EventArgs e)
         {
-            if (!plusSelected || !int.TryParse(currentInput, out secondOperand))
+            if (string.IsNullOrEmpty(currentOperator) || !int.TryParse(currentInput, out secondOperand))
             {
                 return;
             }
 
-            result = firstOperand + secondOperand;
-            txt_show.Text = $"{firstOperand} + {secondOperand} = {result}";
+            if (!TryCalculateResult(out result))
+            {
+                return;
+            }
+
+            txt_show.Text = $"{firstOperand} {currentOperator} {secondOperand} = {result}";
             txt_oprnd.Text = result.ToString();
             currentInput = result.ToString();
-            plusSelected = false;
+            currentOperator = string.Empty;
             justCalculated = true;
         }
 
@@ -69,9 +78,9 @@ namespace SimpleCalculator
             currentInput = string.Empty;
             txt_oprnd.Text = "0";
 
-            if (plusSelected)
+            if (!string.IsNullOrEmpty(currentOperator))
             {
-                txt_show.Text = $"{firstOperand} +";
+                txt_show.Text = $"{firstOperand} {currentOperator}";
                 return;
             }
 
@@ -98,11 +107,11 @@ namespace SimpleCalculator
         {
             txt_oprnd.Text = string.IsNullOrEmpty(currentInput) ? "0" : currentInput;
 
-            if (plusSelected)
+            if (!string.IsNullOrEmpty(currentOperator))
             {
                 txt_show.Text = string.IsNullOrEmpty(currentInput)
-                    ? $"{firstOperand} +"
-                    : $"{firstOperand} + {currentInput}";
+                    ? $"{firstOperand} {currentOperator}"
+                    : $"{firstOperand} {currentOperator} {currentInput}";
                 return;
             }
 
@@ -115,10 +124,33 @@ namespace SimpleCalculator
             secondOperand = 0;
             result = 0;
             currentInput = string.Empty;
-            plusSelected = false;
+            currentOperator = string.Empty;
             justCalculated = false;
             txt_show.Text = string.Empty;
             txt_oprnd.Text = "0";
+        }
+
+        private bool TryCalculateResult(out int calculatedResult)
+        {
+            calculatedResult = currentOperator switch
+            {
+                "+" => firstOperand + secondOperand,
+                "-" => firstOperand - secondOperand,
+                "*" => firstOperand * secondOperand,
+                "/" when secondOperand != 0 => firstOperand / secondOperand,
+                _ => 0
+            };
+
+            if (currentOperator == "/" && secondOperand == 0)
+            {
+                MessageBox.Show("0으로 나눌 수 없습니다.", "계산 오류", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txt_show.Text = $"{firstOperand} {currentOperator}";
+                txt_oprnd.Text = "0";
+                currentInput = string.Empty;
+                return false;
+            }
+
+            return true;
         }
     }
 }
