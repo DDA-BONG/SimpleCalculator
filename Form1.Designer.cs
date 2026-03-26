@@ -46,7 +46,6 @@ namespace SimpleCalculator
             btn_num2 = new Button();
             btn_num3 = new Button();
             btn_plus = new Button();
-            btn_ready = new Button();
             btn_num0 = new Button();
             btn_dot = new Button();
             btn_equal = new Button();
@@ -260,16 +259,6 @@ namespace SimpleCalculator
             btn_plus.UseVisualStyleBackColor = true;
             btn_plus.Click += OperatorButton_Click;
             // 
-            // btn_ready
-            // 
-            btn_ready.Enabled = false;
-            btn_ready.Location = new Point(59, 528);
-            btn_ready.Name = "btn_ready";
-            btn_ready.Size = new Size(94, 29);
-            btn_ready.TabIndex = 19;
-            btn_ready.Text = "준비중";
-            btn_ready.UseVisualStyleBackColor = true;
-            // 
             // btn_num0
             // 
             btn_num0.Font = new Font("맑은 고딕", 18F);
@@ -311,7 +300,6 @@ namespace SimpleCalculator
             Controls.Add(btn_equal);
             Controls.Add(btn_dot);
             Controls.Add(btn_num0);
-            Controls.Add(btn_ready);
             Controls.Add(btn_plus);
             Controls.Add(btn_num3);
             Controls.Add(btn_num2);
@@ -359,7 +347,6 @@ namespace SimpleCalculator
         private Button btn_num2;
         private Button btn_num3;
         private Button btn_plus;
-        private Button btn_ready;
         private Button btn_num0;
         private Button btn_dot;
         private Button btn_equal;

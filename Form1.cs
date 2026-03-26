@@ -48,6 +48,7 @@ namespace SimpleCalculator
             }
 
             currentInput = string.Empty;
+            secondOperand = 0;
             currentOperator = button.Text;
             justCalculated = false;
             txt_show.Text = $"{firstOperand} {currentOperator}";
@@ -73,9 +74,21 @@ namespace SimpleCalculator
             justCalculated = true;
         }
 
+        private void btn_C_Click(object? sender, EventArgs e)
+        {
+            ResetCalculator();
+        }
+
         private void btn_CE_Click(object? sender, EventArgs e)
         {
+            if (justCalculated && string.IsNullOrEmpty(currentOperator))
+            {
+                ResetCalculator();
+                return;
+            }
+
             currentInput = string.Empty;
+            secondOperand = 0;
             txt_oprnd.Text = "0";
 
             if (!string.IsNullOrEmpty(currentOperator))
@@ -85,11 +98,6 @@ namespace SimpleCalculator
             }
 
             txt_show.Text = string.Empty;
-        }
-
-        private void btn_C_Click(object? sender, EventArgs e)
-        {
-            ResetCalculator();
         }
 
         private void btn_del_Click(object? sender, EventArgs e)
@@ -132,23 +140,24 @@ namespace SimpleCalculator
 
         private bool TryCalculateResult(out int calculatedResult)
         {
-            calculatedResult = currentOperator switch
-            {
-                "+" => firstOperand + secondOperand,
-                "-" => firstOperand - secondOperand,
-                "*" => firstOperand * secondOperand,
-                "/" when secondOperand != 0 => firstOperand / secondOperand,
-                _ => 0
-            };
-
             if (currentOperator == "/" && secondOperand == 0)
             {
                 MessageBox.Show("0으로 나눌 수 없습니다.", "계산 오류", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txt_show.Text = $"{firstOperand} {currentOperator}";
                 txt_oprnd.Text = "0";
                 currentInput = string.Empty;
+                calculatedResult = 0;
                 return false;
             }
+
+            calculatedResult = currentOperator switch
+            {
+                "+" => firstOperand + secondOperand,
+                "-" => firstOperand - secondOperand,
+                "*" => firstOperand * secondOperand,
+                "/" => firstOperand / secondOperand,
+                _ => 0
+            };
 
             return true;
         }
